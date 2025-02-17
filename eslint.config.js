@@ -1,7 +1,6 @@
 import globals from 'globals';
 import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
-import pluginReact from 'eslint-plugin-react';
 import pluginPrettier from 'eslint-plugin-prettier';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
 import pluginReactRefresh from 'eslint-plugin-react-refresh';
@@ -9,11 +8,14 @@ import pluginUnusedImports from 'eslint-plugin-unused-imports';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
-  { languageOptions: { globals: globals.browser } },
+  {
+    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
+    languageOptions: {
+      globals: globals.browser
+    }
+  },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
   {
     plugins: {
       prettier: pluginPrettier,
@@ -21,7 +23,6 @@ export default [
       'react-refresh': pluginReactRefresh,
       'unused-imports': pluginUnusedImports
     },
-    extends: ['eslint-config-prettier'],
     rules: {
       'prettier/prettier': 'error',
       'react-hooks/rules-of-hooks': 'error',
@@ -32,6 +33,11 @@ export default [
         'warn',
         { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' }
       ]
+    }
+  },
+  {
+    rules: {
+      'prettier/prettier': 'error'
     }
   }
 ];
