@@ -1,17 +1,19 @@
 import clsx from 'clsx';
+import { ButtonHTMLAttributes } from 'react';
 
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   className?: string;
   disabled?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
-function Button({ text, className = 'px-4 py-1 text-base rounded', disabled = false, onClick }: ButtonProps) {
+function Button({ text, className = 'px-4 py-1 text-base rounded', disabled = false, onClick, ...rest }: ButtonProps) {
   return (
     <button
       onClick={onClick}
       disabled={disabled}
+      {...rest}
       className={clsx(
         'transition-colors duration-300',
         disabled

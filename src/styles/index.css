@@ -1,2 +1,7 @@
 @import url(reset.css);
 @import 'tailwindcss';
+
+.required::after {
+  content: ' *';
+  color: red;
+}

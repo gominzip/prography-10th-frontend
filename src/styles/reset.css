@@ -43,11 +43,19 @@ textarea {
   word-wrap: break-word;
 }
 
-fieldset,
+legend {
+  display: table;
+  float: left;
+  padding: 0;
+  width: 100%;
+
+  + * {
+    clear: both;
+  }
+}
+
 img {
   border: 0;
-}
-img {
   vertical-align: top;
 }
 ol,
