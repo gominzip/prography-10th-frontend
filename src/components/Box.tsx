@@ -6,7 +6,7 @@ interface BoxProps {
 }
 
 const Box = ({ children, className = '' }: BoxProps) => {
-  return <div className={`bg-white rounded-2xl shadow py-8 px-5 mx-auto w-full ${className}`}>{children}</div>;
+  return <div className={`bg-white rounded-2xl shadow p-7 mx-auto w-full ${className}`}>{children}</div>;
 };
 
 export default Box;
