@@ -1,5 +1,12 @@
+import { Form, Header } from './components';
+
 function RecruitFunnelPage() {
-  return <div>RecruitFunnelPage</div>;
+  return (
+    <div className="space-y-3">
+      <Header title="Prography 10기 지원서" />
+      <Form />
+    </div>
+  );
 }
 
 export default RecruitFunnelPage;
