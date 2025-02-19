@@ -9,6 +9,14 @@ export const ERROR_MESSAGES = {
 
 export const PHONE_REGEX = /^010-\d{4}-\d{4}$/;
 
+export const fieldLabels = {
+  consent: '개인정보 수집 동의',
+  name: '이름',
+  email: '이메일',
+  phone: '전화번호',
+  part: '지원 분야'
+} as const;
+
 export const partFieldMapping = {
   프론트엔드: 'fe',
   백엔드: 'be',
@@ -17,6 +25,3 @@ export const partFieldMapping = {
   안드로이드: 'aos',
   'Product Owner': 'po'
 } as const;
-
-export type FieldTypeUI = keyof typeof partFieldMapping;
-export type FieldTypeServer = (typeof partFieldMapping)[FieldTypeUI];
