@@ -38,7 +38,8 @@ function Form() {
         consent: JSON.parse(data.consent as unknown as string)
       };
 
-      await sendApplicationForm(formattedData);
+      const response = await sendApplicationForm(formattedData);
+      console.log('서버 응답:', response);
       setIsSubmitted(true);
     } catch (error) {
       console.error(error);
