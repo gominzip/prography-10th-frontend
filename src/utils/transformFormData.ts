@@ -1,5 +1,5 @@
-import { fieldLabels, partFieldMapping } from '@/constants/form';
-import type { FormKey, PartKey } from '@/types/form';
+import { fieldLabels, partFieldMapping } from '@/constants';
+import type { FormKey, PartKey } from '@/types';
 
 export const formatValue = (key: FormKey, value: string) => {
   if (key === 'consent') return value === 'true' ? '동의' : '비동의';

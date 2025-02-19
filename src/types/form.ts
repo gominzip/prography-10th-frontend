@@ -1,4 +1,4 @@
-import { fieldLabels, partFieldMapping } from '@/constants/form';
+import { fieldLabels, partFieldMapping } from '@/constants';
 import { FormDataSchema } from '@/lib/schema';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { z } from 'zod';

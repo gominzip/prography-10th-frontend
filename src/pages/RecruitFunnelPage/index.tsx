@@ -1,4 +1,4 @@
-import { Form, Header } from './components';
+import { Form, Header } from '@/pages/RecruitFunnelPage/components';
 
 function RecruitFunnelPage() {
   return (

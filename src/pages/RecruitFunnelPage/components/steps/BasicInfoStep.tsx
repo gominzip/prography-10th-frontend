@@ -1,5 +1,5 @@
-import type { StepProps } from '@/types/form';
-import { FieldSet, Section, TextField } from '../fields';
+import type { StepProps } from '@/types';
+import { FieldSet, Section, TextField } from '@/pages/RecruitFunnelPage/components';
 
 function BasicInfoStep({ register, errors, showError }: StepProps) {
   return (

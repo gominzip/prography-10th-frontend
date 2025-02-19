@@ -1,7 +1,6 @@
-import type { StepProps } from '@/types/form';
-import { FieldSet, RadioField } from '../fields';
-import Section from '../fields/Section';
-import { partFieldMapping } from '@/constants/form';
+import type { StepProps } from '@/types';
+import { FieldSet, RadioField, Section } from '@/pages/RecruitFunnelPage/components';
+import { partFieldMapping } from '@/constants';
 
 function ApplicationInfoStep({ register, errors, showError }: StepProps) {
   const parts = Object.keys(partFieldMapping) as Array<keyof typeof partFieldMapping>;

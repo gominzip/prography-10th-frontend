@@ -1,13 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { ApplicationInfoStep, BasicInfoStep, CompleteStep, ConsentStep } from './steps';
 import { FormDataSchema } from '@/lib/schema';
-import type { Inputs } from '@/types/form';
+import type { Inputs } from '@/types';
 import { Box, Button, ConfirmModal, ProgressBar } from '@/components';
-import { useModal } from '@/hooks/useModal';
 import { transformFormData } from '@/utils/transformFormData';
-import { useFormStep } from '@/hooks/useFormStep';
+import { useFormStep, useModal } from '@/hooks';
+import { ApplicationInfoStep, BasicInfoStep, CompleteStep, ConsentStep } from '@/pages/RecruitFunnelPage/components';
 
 const steps = [
   { id: 1, name: '개인정보 수집 동의', component: ConsentStep, fields: ['consent'] },

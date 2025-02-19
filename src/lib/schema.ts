@@ -1,5 +1,5 @@
-import { ERROR_MESSAGES, partFieldMapping, PHONE_REGEX } from '@/constants/form';
-import type { PartAPIValue } from '@/types/form';
+import { ERROR_MESSAGES, partFieldMapping, PHONE_REGEX } from '@/constants';
+import type { PartAPIValue } from '@/types';
 import { z } from 'zod';
 
 export const FormDataSchema = z.object({

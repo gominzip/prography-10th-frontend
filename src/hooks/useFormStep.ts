@@ -4,7 +4,7 @@ interface UseFormStepParams {
   totalSteps: number;
 }
 
-export function useFormStep({ totalSteps }: UseFormStepParams) {
+function useFormStep({ totalSteps }: UseFormStepParams) {
   const [currentStep, setCurrentStep] = useState(0);
   const [previousStep, setPreviousStep] = useState(0);
 
@@ -53,3 +53,5 @@ export function useFormStep({ totalSteps }: UseFormStepParams) {
     prev
   };
 }
+
+export default useFormStep;

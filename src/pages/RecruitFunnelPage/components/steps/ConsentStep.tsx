@@ -1,5 +1,5 @@
-import type { StepProps } from '@/types/form';
-import { FieldSet, RadioField, Section } from '../fields';
+import type { StepProps } from '@/types';
+import { FieldSet, RadioField, Section } from '@/pages/RecruitFunnelPage/components';
 
 function ConsentStep({ register, errors, showError }: StepProps) {
   return (
