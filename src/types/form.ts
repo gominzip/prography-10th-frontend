@@ -7,7 +7,7 @@ export type FormKey = keyof typeof fieldLabels;
 export type PartKey = keyof typeof partFieldMapping;
 export type PartAPIValue = (typeof partFieldMapping)[PartKey];
 
-export type FormPayload = {
+export type ApplicationFormData = {
   consent: boolean;
   name: string;
   email: string;

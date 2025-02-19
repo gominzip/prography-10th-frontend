@@ -7,6 +7,7 @@ import { Box, Button, ConfirmModal, ProgressBar } from '@/components';
 import { transformFormData } from '@/utils/transformFormData';
 import { useFormStep, useModal } from '@/hooks';
 import { ApplicationInfoStep, BasicInfoStep, CompleteStep, ConsentStep } from '@/pages/RecruitFunnelPage/components';
+import { sendApplicationForm } from '@/apis';
 
 const steps = [
   { id: 1, name: '개인정보 수집 동의', component: ConsentStep, fields: ['consent'] },
@@ -30,9 +31,19 @@ function Form() {
 
   type FieldName = keyof Inputs;
 
-  const processForm: SubmitHandler<Inputs> = (data) => {
-    console.log('폼 제출 데이터:', data);
-    setIsSubmitted(true);
+  const processForm: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const formattedData = {
+        ...data,
+        consent: JSON.parse(data.consent as unknown as string)
+      };
+
+      await sendApplicationForm(formattedData);
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error(error);
+      alert('폼 제출 중 오류가 발생했습니다.');
+    }
   };
 
   const validateFields = async () => {
