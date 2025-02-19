@@ -15,7 +15,7 @@ export const transformFormData = (formData: Record<string, string>) => {
       let formattedValue = value;
 
       if (key === 'consent') {
-        formattedValue = value === 'true' ? '동의' : '미동의';
+        formattedValue = value === 'true' ? 'O' : 'X';
       } else if (key === 'part') {
         const partKey = Object.keys(partFieldMapping).find(
           (k) => partFieldMapping[k as keyof typeof partFieldMapping] === value

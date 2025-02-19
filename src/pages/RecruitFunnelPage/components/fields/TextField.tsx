@@ -7,7 +7,7 @@ interface TextFieldProps {
 function TextField({ id, type, placeholder, ...rest }: TextFieldProps) {
   return (
     <input
-      className="w-full py-2 px-4 text-[14px] bg-blue-50 rounded-md border border-gray-300"
+      className="field w-full py-2 px-4 text-[14px] bg-blue-50 rounded-md border border-gray-300 focus:outline-none"
       id={id}
       type={type}
       placeholder={placeholder}
