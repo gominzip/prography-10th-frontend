@@ -33,7 +33,7 @@ function ConfirmModal({
 
         {/* 모달 바디 */}
         <div className="w-full mb-6">
-          <p className="text-sm text-gray-600 text-center">{description}</p>
+          <p className="text-sm text-gray-600 text-center whitespace-pre-line">{description}</p>
         </div>
 
         {/* 모달 푸터 */}
