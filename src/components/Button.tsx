@@ -8,7 +8,13 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: () => void;
 }
 
-function Button({ text, className = 'px-4 py-1 text-base rounded', disabled = false, onClick, ...rest }: ButtonProps) {
+function Button({
+  text,
+  className = 'px-4 py-1 text-[14px] rounded',
+  disabled = false,
+  onClick,
+  ...rest
+}: ButtonProps) {
   return (
     <button
       onClick={onClick}
@@ -17,7 +23,7 @@ function Button({ text, className = 'px-4 py-1 text-base rounded', disabled = fa
       className={clsx(
         'transition-colors duration-300',
         disabled
-          ? 'bg-gray-400 text-gray-700 cursor-not-allowed'
+          ? 'bg-gray-200 text-gray-700 cursor-not-allowed'
           : 'bg-[#1973e8] text-white hover:bg-blue-700 cursor-pointer',
         className
       )}
