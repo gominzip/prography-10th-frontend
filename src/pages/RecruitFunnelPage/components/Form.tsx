@@ -8,14 +8,19 @@ import { Box, Button, ConfirmModal } from '@/components';
 import clsx from 'clsx';
 import { useModal } from '@/hooks/useModal';
 import { transformFormData } from '@/utils/transformFormData';
+import { useFormStep } from '@/hooks/useFormStep';
+
+const steps = [
+  { id: 1, name: '개인정보 수집 동의', component: ConsentStep, fields: ['consent'] },
+  { id: 2, name: '기본 정보', component: BasicInfoStep, fields: ['name', 'email', 'phone'] },
+  { id: 3, name: '지원 정보', component: ApplicationInfoStep, fields: ['part'] }
+] as const;
 
 function Form() {
-  const [, setPreviousStep] = useState(0);
-  const [currentStep, setCurrentStep] = useState(0);
-  const [showError, setShowError] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const { isOpen, closeModal, openModal } = useModal();
+  const { currentStep, showError, next, prev } = useFormStep({ totalSteps: steps.length });
 
   const {
     register,
@@ -25,53 +30,29 @@ function Form() {
     formState: { errors }
   } = useForm<Inputs>({ mode: 'onChange', resolver: zodResolver(FormDataSchema) });
 
-  const steps = [
-    { id: 1, name: '개인정보 수집 동의', component: ConsentStep, fields: ['consent'] },
-    { id: 2, name: '기본 정보', component: BasicInfoStep, fields: ['name', 'email', 'phone'] },
-    { id: 3, name: '지원 정보', component: ApplicationInfoStep, fields: ['part'] }
-  ] as const;
-
   type FieldName = keyof Inputs;
 
-  // 폼 제출 함수
   const processForm: SubmitHandler<Inputs> = (data) => {
     console.log('폼 제출 데이터:', data);
     setIsSubmitted(true);
   };
 
-  // 모든 필드를 검사하고 유효하지 않은 경우 에러 보여주기
   const validateFields = async () => {
     const fields = steps[currentStep].fields;
-    if (!fields) return true;
-
     const isValid = await trigger(fields as readonly FieldName[], { shouldFocus: true });
-    setShowError(true);
-
     return isValid;
   };
 
-  // 다음 단계로 이동
-  const next = async () => {
-    const isValid = await validateFields();
-    if (!isValid) return;
-
-    if (currentStep === steps.length - 1) {
-      openModal();
-
-      return;
-    }
-
-    setPreviousStep(currentStep);
-    setShowError(false);
-    setCurrentStep((step) => step + 1);
+  const finalStepAction = () => {
+    openModal();
   };
 
-  // 이전 단계로 이동
-  const prev = () => {
-    if (currentStep > 0) {
-      setPreviousStep(currentStep);
-      setCurrentStep((step) => step - 1);
-    }
+  const handleNext = () => {
+    next(validateFields, finalStepAction);
+  };
+
+  const handlePrev = () => {
+    prev();
   };
 
   const CurrentComponent = steps[currentStep].component;
@@ -105,8 +86,8 @@ function Form() {
 
       {!isSubmitted && (
         <Box className="flex justify-between">
-          <Button text="뒤로" onClick={prev} disabled={currentStep === 0} />
-          <Button text={currentStep < steps.length - 1 ? '다음' : '제출하기'} onClick={next} />
+          <Button text="뒤로" onClick={handlePrev} disabled={currentStep === 0} />
+          <Button text={currentStep < steps.length - 1 ? '다음' : '제출하기'} onClick={handleNext} />
         </Box>
       )}
 
@@ -118,7 +99,7 @@ function Form() {
           description={transformFormData(getValues())}
           leftBtnText="취소"
           rightBtnText="제출"
-          rightBtnAction={() => handleSubmit(processForm)()}
+          rightBtnAction={handleSubmit(processForm)}
           closeModal={closeModal}
         />
       )}
