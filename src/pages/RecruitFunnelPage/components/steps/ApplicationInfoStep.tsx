@@ -10,10 +10,10 @@ function ApplicationInfoStep({ register, errors, showError }: StepProps) {
     <Section title="지원 정보" description="지원하고자 하는 분야를 선택해주세요">
       <FieldSet
         legend="지원 분야를 선택해주세요"
-        warningText={showError && errors.selectedOption ? errors.selectedOption.message : undefined}
+        warningText={showError && errors.part ? errors.part.message : undefined}
       >
         {parts.map((label) => (
-          <RadioField key={label} label={label} value={partFieldMapping[label]} {...register('selectedOption')} />
+          <RadioField key={label} label={label} value={partFieldMapping[label]} {...register('part')} />
         ))}
       </FieldSet>
     </Section>

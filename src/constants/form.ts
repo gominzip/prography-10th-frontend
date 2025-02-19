@@ -4,7 +4,7 @@ export const ERROR_MESSAGES = {
   nameMaxLength: '이름은 최대 50자까지 가능합니다.',
   emailInvalid: '올바른 이메일 주소를 입력해주세요.',
   phoneInvalid: '휴대폰 번호는 010-xxxx-xxxx 형식이어야 합니다.',
-  selectedOption: '지원 정보를 선택해주세요.'
+  part: '지원 분야를 선택해주세요.'
 };
 
 export const PHONE_REGEX = /^010-\d{4}-\d{4}$/;

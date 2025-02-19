@@ -8,7 +8,7 @@ export const FormDataSchema = z.object({
   name: z.string().min(2, { message: ERROR_MESSAGES.nameMinLength }).max(50, { message: ERROR_MESSAGES.nameMaxLength }),
   email: z.string().email({ message: ERROR_MESSAGES.emailInvalid }),
   phone: z.string().regex(PHONE_REGEX, { message: ERROR_MESSAGES.phoneInvalid }),
-  selectedOption: z.enum(Object.values(partFieldMapping) as [FieldTypeServer, ...FieldTypeServer[]], {
-    errorMap: () => ({ message: ERROR_MESSAGES.selectedOption })
+  part: z.enum(Object.values(partFieldMapping) as [FieldTypeServer, ...FieldTypeServer[]], {
+    errorMap: () => ({ message: ERROR_MESSAGES.part })
   })
 });
