@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ApplicationInfoStep, BasicInfoStep, CompleteStep, ConsentStep } from './steps';
 import { FormDataSchema } from '@/lib/schema';
@@ -41,18 +41,24 @@ function Form() {
     const isValid = await trigger(fields as readonly FieldName[], { shouldFocus: true });
     return isValid;
   };
+  const finalStepAction = () => openModal();
+  const handleNext = () => next(validateFields, finalStepAction);
+  const handlePrev = () => prev();
 
-  const finalStepAction = () => {
-    openModal();
+  const preventRefresh = (event: BeforeUnloadEvent) => {
+    if (!isSubmitted) {
+      event.preventDefault();
+      event.returnValue = '';
+    }
   };
 
-  const handleNext = () => {
-    next(validateFields, finalStepAction);
-  };
+  useEffect(() => {
+    window.addEventListener('beforeunload', preventRefresh);
 
-  const handlePrev = () => {
-    prev();
-  };
+    return () => {
+      window.removeEventListener('beforeunload', preventRefresh);
+    };
+  }, [isSubmitted]);
 
   const CurrentComponent = steps[currentStep].component;
 
