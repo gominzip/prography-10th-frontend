@@ -4,8 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { ApplicationInfoStep, BasicInfoStep, CompleteStep, ConsentStep } from './steps';
 import { FormDataSchema } from '@/lib/schema';
 import type { Inputs } from '@/types/form';
-import { Box, Button, ConfirmModal } from '@/components';
-import clsx from 'clsx';
+import { Box, Button, ConfirmModal, ProgressBar } from '@/components';
 import { useModal } from '@/hooks/useModal';
 import { transformFormData } from '@/utils/transformFormData';
 import { useFormStep } from '@/hooks/useFormStep';
@@ -59,36 +58,19 @@ function Form() {
 
   return (
     <>
-      <Box>
-        <div className="flex items-center justify-between w-full max-w-2xl mx-auto gap-1">
-          {steps.map((_, index) => (
-            <>
-              {index > 0 && <div className={`h-1 flex-1 ${index <= currentStep ? 'bg-blue-500' : 'bg-gray-300'}`} />}
-
-              <div
-                className={clsx(
-                  'w-10 h-10 flex items-center justify-center rounded-full text-base transition-all',
-                  index <= currentStep ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-600'
-                )}
-              >
-                {index + 1}
-              </div>
-            </>
-          ))}
-        </div>
-      </Box>
-
       {!isSubmitted && (
-        <form>
-          <CurrentComponent register={register} errors={errors} showError={showError} />
-        </form>
-      )}
+        <>
+          <ProgressBar totalSteps={steps.length} currentStep={currentStep} />
 
-      {!isSubmitted && (
-        <Box className="flex justify-between">
-          <Button text="뒤로" onClick={handlePrev} disabled={currentStep === 0} />
-          <Button text={currentStep < steps.length - 1 ? '다음' : '제출하기'} onClick={handleNext} />
-        </Box>
+          <form>
+            <CurrentComponent register={register} errors={errors} showError={showError} />
+          </form>
+
+          <Box className="flex justify-between">
+            <Button text="뒤로" onClick={handlePrev} disabled={currentStep === 0} />
+            <Button text={currentStep < steps.length - 1 ? '다음' : '제출하기'} onClick={handleNext} />
+          </Box>
+        </>
       )}
 
       {isSubmitted && <CompleteStep />}
