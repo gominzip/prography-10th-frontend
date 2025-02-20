@@ -7,6 +7,9 @@
 ## 1. 프로젝트 실행
 
 ```bash
+git clone https://github.com/gominzip/prography-10th-frontend.git
+cd prography-10th-frontend
+
 npm install
 npm run dev
 ```
